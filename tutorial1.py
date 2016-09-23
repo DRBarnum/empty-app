@@ -19,6 +19,5 @@ ball.scale = 0.1
 ball.dir = 1
 ball.go = True
 
-
 myapp = App(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
