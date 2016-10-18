@@ -1,24 +1,32 @@
-from ggame import App, RectangleAsset, ImageAsset, SoundAsset
-from ggame import LineStyle, Color, Sprite, Sound
+from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 
-green = Color(0x00ff00, 1)
-black = Color(0, 1)
-noline = LineStyle(0, black)
-bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, noline, green)
-bg = Sprite(bg_asset, (0,0))
+# Background
+class SpaceShip(Sprite):
+    """
+    Animated space ship
+    """
+    asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
+        Frame(227,0,292-227,125), 4, 'vertical')
 
-# A ball! This is already in the ggame-tutorials repository
-ball_asset = ImageAsset("images/orb-150545_640.png")
-ball = Sprite(ball_asset, (0, 0))
-# Original image is too big. Scale it to 1/10 its original size
-ball.scale = 0.1
-# custom attributes
-ball.dir = 1
-ball.go = True
-def reverse(b):
-    b.dir *= -1
-myapp = App(SCREEN_WIDTH, SCREEN_HEIGHT)
+    def __init__(self, position):
+        super().__init__(SpaceShip.asset, position)
+
+class SpaceGame(App):
+    """
+    Tutorial4 space game example.
+    """
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        black = Color(0, 1)
+        noline = LineStyle(0, black)
+        bg_asset = RectangleAsset(SCREEN_WIDTH, SCREEN_HEIGHT, noline, black)
+        bg = Sprite(bg_asset, (0,0))
+        SpaceShip((100,100))
+
+   
+myapp = SpaceGame(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
+
